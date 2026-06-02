@@ -1,0 +1,19 @@
+[
+	{
+		"name": "fn_add_numbers",
+		"description": "Add two numbers",
+		"parameters": {
+			"a": {"type": "number"},
+			"b": {"type": "number"}
+		},
+		"returns": {"type": "number"}
+	},
+	{
+		"name": "fn_reverse_string",
+		"description": "Reverse a string",
+		"parameters": {
+			"s": {"type": "string"}
+	},
+	"returns": {"type": "string"}
+	}
+]
