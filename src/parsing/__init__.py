@@ -1,13 +1,13 @@
-from .functions_definitions import (
-    get_functions_definition,
-    FunctionsDefinitionError
+from .function_definition import (
+    get_function_definitions,
+    FunctionDefinitionError
     )
-from .prompts import get_prompts, PromptError
+from .prompt import get_prompts, PromptError
 
 
 __all__ = [
-    "get_functions_definition",
-    "FunctionsDefinitionError",
+    "get_function_definitions",
+    "FunctionDefinitionError",
     "get_prompts",
     "PromptError"
 ]
