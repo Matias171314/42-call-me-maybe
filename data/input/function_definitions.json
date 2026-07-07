@@ -1,19 +1,60 @@
 [
-	{
-		"name": "fn_add_numbers",
-		"description": "Add two numbers",
-		"parameters": {
-			"a": {"type": "number"},
-			"b": {"type": "number"}
-		},
-		"returns": {"type": "number"}
-	},
-	{
-		"name": "fn_reverse_string",
-		"description": "Reverse a string",
-		"parameters": {
-			"s": {"type": "string"}
-	},
-	"returns": {"type": "string"}
-	}
+    {
+        "name": "fn_add_numbers",
+        "description": "Add two numbers",
+        "parameters": {
+            "a": {"type": "number"},
+            "b": {"type": "number"}
+        },
+        "returns": {"type": "number"}
+    },
+    {
+        "name": "fn_reverse_string",
+        "description": "Reverse a string",
+        "parameters": {
+            "s": {"type": "string"}
+        },
+        "returns": {"type": "string"}
+    },
+    {
+        "name": "fn_calculate_factorial",
+        "description": "Calculate the factorial of a given integer",
+        "parameters": {
+            "n": {"type": "number"}
+        },
+        "returns": {"type": "number"}
+    },
+    {
+        "name": "fn_translate",
+        "description": "Translate a word into a target language",
+        "parameters": {
+            "word": {"type": "string"},
+            "language": {"type": "string"}
+        },
+        "returns": {"type": "string"}
+    },
+    {
+        "name": "fn_is_even",
+        "description": "Check if a number is even (returns true) or odd (returns false)",
+        "parameters": {
+            "number": {"type": "number"}
+        },
+        "returns": {"type": "boolean"}
+    },
+    {
+        "name": "fn_celsius_to_fahrenheit",
+        "description": "Convert a temperature from Celsius to Fahrenheit",
+        "parameters": {
+            "celsius": {"type": "number"}
+        },
+        "returns": {"type": "number"}
+    },
+    {
+        "name": "fn_count_vowels",
+        "description": "Count how many vowels are in a given text",
+        "parameters": {
+            "text": {"type": "string"}
+        },
+        "returns": {"type": "number"}
+    }
 ]
