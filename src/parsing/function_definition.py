@@ -4,14 +4,31 @@ from pydantic import BaseModel, ValidationError
 
 
 class FunctionDefinitionError(Exception):
+    """Custom exception for errors during function definitions parsing."""
     pass
 
 
 class ParameterInfo(BaseModel):
+    """
+    Model representing the type information of a parameter or return value.
+
+    Attributes:
+        type (str): The expected data type (e.g., 'string', 'number').
+    """
     type: str
 
 
 class FunctionDefinition(BaseModel):
+    """
+    Model representing the complete definition of a function.
+
+    Attributes:
+        name (str): The name of the function.
+        description (str): A brief description of what the function does.
+        parameters (Dict[str, ParameterInfo]): Dictionary mapping parameter
+            names to their type information.
+        returns (ParameterInfo): The expected return type of the function.
+    """
     name: str
     description: str
     parameters: Dict[str, ParameterInfo]
@@ -19,27 +36,47 @@ class FunctionDefinition(BaseModel):
 
 
 def get_function_definitions(file_path: str) -> List[FunctionDefinition]:
+    """
+    Reads and validates function definitions from a JSON file.
+
+    Args:
+        file_path (str): The path to the JSON file containing functions.
+
+    Returns:
+        List[FunctionDefinition]: List of validated FunctionDefinition.
+
+    Raises:
+        FunctionDefinitionError: If file not found, invalid JSON, no read
+            permissions, not a list, or schema mismatch.
+    """
     try:
         with open(file_path, 'r') as file:
             data_functions = json.load(file)
     except FileNotFoundError:
         raise FunctionDefinitionError(
-            f"Functions definition file was not found at '{file_path}'."
+            "File Not Found: The function definitions file at "
+            f"'{file_path}' does not exist."
             )
     except json.JSONDecodeError as e:
         raise FunctionDefinitionError(
-            f"File '{file_path}' is not a valid JSON:\n{e}"
+            f"JSON Decode Error: The file '{file_path}' contains "
+            f"invalid JSON data. Details: {e}"
             )
     except PermissionError:
-        raise FunctionDefinitionError("Non read permission in the file.")
+        raise FunctionDefinitionError(
+            "Permission Denied: Lacking read permissions for "
+            f"the file '{file_path}'."
+            )
     except Exception as e:
         raise FunctionDefinitionError(
-            f"Unexpected error reading the file:\n{e}"
+            f"Unexpected Error: An issue occurred while reading "
+            f"'{file_path}'. Details: {e}"
             )
 
     if not isinstance(data_functions, list):
         raise FunctionDefinitionError(
-            "The JSON file must contain a list of functions."
+            "Invalid Format: The top-level JSON structure must be a list "
+            "of functions."
             )
 
     validated_functions: List[FunctionDefinition] = []
@@ -56,6 +93,7 @@ def get_function_definitions(file_path: str) -> List[FunctionDefinition]:
         except ValidationError as e:
             fail_name = function.get("name", "Unknown")
             raise FunctionDefinitionError(
-                f"Structure error in function '{fail_name}':\n{e}"
+                f"Validation Error: The function '{fail_name}' does not "
+                f"match the expected schema.\nDetails: {e}"
                 )
     return validated_functions
