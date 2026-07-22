@@ -5,6 +5,7 @@ description = "42 project: Introduction to function calling in Large Language Mo
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "llm-sdk",
     "numpy>=2.2.6",
     "pydantic>=2.13.4",
 ]
@@ -14,3 +15,11 @@ dev = [
     "flake8>=7.3.0",
     "mypy>=2.1.0",
 ]
+
+[tool.uv.workspace]
+members = [
+    "llm_sdk",
+]
+
+[tool.uv.sources]
+llm-sdk = { workspace = true }
