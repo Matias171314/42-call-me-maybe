@@ -39,9 +39,7 @@ class Model(Small_LLM_Model):
         tensors = self.encode(prompt)
 
         probabilities = self.get_logits_from_input_ids(tensors.tolist()[0])
-
         sorted_tokens = sorted(probabilities, reverse=True)
-
         token_id = probabilities.index(sorted_tokens[skip])
 
         return self.decode(token_id)
@@ -74,7 +72,6 @@ class Model(Small_LLM_Model):
 
         probabilities = self.get_logits_from_input_ids(tensors.tolist()[0])
         sorted_tokens = sorted(probabilities, reverse=True)
-
         while True:
             token_id = probabilities.index(sorted_tokens[skip])
             yield self.decode(token_id)
